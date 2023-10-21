@@ -23,20 +23,45 @@ int main(void) {
                 printf("You are sending %d to %s\nEnter your PIN to complete the transaction: ", amount, number);
                 scanf("%d", &pin);
                 goto end;
+            } else {
+                printf("Insufficient balance, load money to continue");
+                goto start;
+            }
             break;
         case 2:
             printf("1. Buy for self\n2. Buy for another number\n");
-            scanf("%d", &dh);  
-            printf("Enter number to send to: ");
-            scanf("%s", number);
-            printf("Enter amount: ");
-            scanf("%d", &amount);
-            if (balance >= amount) {
-                balance = balance - amount;
-                printf("You are sending %d to %s\nEnter your PIN to complete the transaction: ", amount, number);
-                scanf("%d", &pin);
-                goto end;
-            break;
+            scanf("%d", &dh);
+            switch(dh) {
+                case 1:
+                    printf("Enter airtime amount: ");
+                    scanf("%d", &amount);
+                    if (balance >= amount) {
+                    balance = balance - amount;
+                    printf("You are buying airtime of %d \nEnter your PIN to complete the transaction: ", amount);
+                    scanf("%d", &pin);
+                    goto end;
+                    } else {
+                    printf("Insufficient balance, load money to continue");
+                    goto start;
+                    }
+                    break;
+                case 2:
+                    printf("Enter number to buy airtime for: ");
+                    scanf("%s", number);
+                    printf("Enter airtime amount: ");
+                    scanf("%d", &amount);
+                    if (balance >= amount) {
+                        balance = balance - amount;
+                        printf("You are buying airtime worth %d for %s\nEnter your PIN to complete the transaction: ", amount, number);
+                        scanf("%d", &pin);
+                        goto end;
+                    } else {
+                    printf("Insufficient balance, load money to continue");
+                    goto start;
+            }
+                    break;
+
+            }  
             break;
         case 3:
             break;
