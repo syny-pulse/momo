@@ -1,4 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void printRandomFiveDigits(int count) {
+    for (int i = 0; i < count; i++) {
+        int randomNum = rand() % 90000 + 10000;  
+        printf("%d\n", randomNum);
+    }
+}
 
 int main(void) {
     int ch, dh, amount, balance = 5000, pin1 = 2002, pin;
@@ -64,6 +73,20 @@ int main(void) {
             }  
             break;
         case 3:
+            printf("Enter amount to withdraw: ");
+            scanf("%d", &amount);
+            if (balance > amount) {
+                printf("Enter PIN to complete transaction: ");
+                scanf("%d", &pin);
+                if(pin == pin1) {
+                    printf("Transaction successful, your secret code is \n");
+                    srand(time(NULL));
+                    printRandomFiveDigits(1);
+                }
+            } else {
+                printf("Insufficient balance! Enter a less amount\n");
+                goto start;
+            }
             break;
         case 4:
             break;
